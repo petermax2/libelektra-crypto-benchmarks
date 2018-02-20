@@ -32,17 +32,17 @@
 
 
 # Set defaults for the environment variables
-if [ -z BENCHMARK_BIN ]
+if [ -z $BENCHMARK_BIN ]
 then
 	BENCHMARK_BIN="/libelektra/build/bin/benchmark_crypto_comparison"
 fi
 
-if [ -z RESULT_DIR ]
+if [ -z $RESULT_DIR ]
 then
 	RESULT_DIR="${PWD}/../results/"
 fi
 
-if [ -z DATASET_ID ]
+if [ -z $DATASET_ID ]
 then
 	DATASET_ID=$(uuidgen)
 fi
@@ -51,5 +51,6 @@ fi
 for RUN in 1 2 3 4 5 6 7 8 9 10 11 15 17 20 25 30 31 32 35 40 50 51 52 55 56 57 60 70 80 90 100
 do
 	$BENCHMARK_BIN $RUN >> "${RESULT_DIR}/comparison_${DATASET_ID}_${RUN}.txt"
+	rm -f "${HOME}/.config/benchmark*.ecf"
 done
 
