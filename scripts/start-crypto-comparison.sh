@@ -48,7 +48,7 @@ then
 fi
 
 # start the benchmark runs
-for RUN in 1 2 3 4 5 6 7 8 9 10 11 15 17 20 25 30 31 32 35 40 50 51 52 55 56 57 60 70 80 90 100
+for RUN in 1 2 3 4 5 6 7 8 9 10 11 15 17 20 25 30 31 32 35 40 50 51 52 55 56 57 60 70 80 90 100 150 175 200 250 300 350 400 500 1000
 do
 	rm -f ${HOME}/.config/benchmark*.ecf
 	$BENCHMARK_BIN $RUN >> "${RESULT_DIR}/comparison_${DATASET_ID}_${RUN}.txt"
