@@ -51,6 +51,6 @@ fi
 for RUN in 1 2 3 4 5 6 7 8 9 10 11 15 17 20 25 30 31 32 35 40 50 51 52 55 56 57 60 70 80 90 100
 do
 	$BENCHMARK_BIN $RUN >> "${RESULT_DIR}/comparison_${DATASET_ID}_${RUN}.txt"
-	rm -f "${HOME}/.config/benchmark*.ecf"
+	rm -f ${HOME}/.config/benchmark*.ecf
 done
 
