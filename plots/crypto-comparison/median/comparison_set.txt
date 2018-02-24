@@ -12,7 +12,7 @@ set grid
 set ylabel "time in s"
 set ytics border in scale 0.25,0.25 nomirror norotate autojustify
 
-set xlabel "number of decrypted configuration settings"
+set xlabel "number of encrypted configuration settings"
 set xtics border nomirror norotate autojustify
 
 set xrange [1:50]
