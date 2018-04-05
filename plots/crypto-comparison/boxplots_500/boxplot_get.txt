@@ -1,10 +1,10 @@
 # Boxplot
 # 
 # gnuplot commands to create the boxplot
-set terminal pdf monochrome linewidth 1.0 solid size 18.0cm,15.0cm
+set terminal pdf monochrome linewidth 1.0 solid size 7.0cm,20.0cm
 set output "boxplot_500_get.pdf"
 
-set multiplot layout 2,3
+set multiplot layout 5,1
 
 set border 31 lt black linewidth 1.000 dashtype solid
 set boxwidth 0.5 absolute
