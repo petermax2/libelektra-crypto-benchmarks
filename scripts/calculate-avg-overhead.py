@@ -49,7 +49,7 @@ def calculate_overhead( results, variant, phase ):
         avg += (1/n)*(float(crypto_runtime[i]) - float(base_runtime[i]))
     print("avg\t" + phase + "\t" + variant + "\t" + str(avg))
     
-    # TODO print overhead
+    # TODO print median overhead
 
 def main():
     # initialize the result set
