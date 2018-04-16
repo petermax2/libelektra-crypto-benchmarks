@@ -29,25 +29,43 @@ import re
 import sys
 
 DATA_PATH = "../plots/crypto-comparison/median/"
+KDB_PHASES = {"get", "set"}
+NOCRYPTO = "no_crypto_plugin"
+VARIANTS = {NOCRYPTO,"crypto_gcrypt","crypto_openssl","crypto_botan", "fcrypt"}
 
-def parse_file( path, resultset ):
+def parse_file( path, results ):
     with open(path,'r') as f:
-        line = f.readline()
-        parts = line.split(' ')
-        resultset[parts[0]] = parts[1]
+        for line in f:
+            parts = line.split(' ')
+            results[parts[0]] = parts[1]
     f.close()
 
-def main():
-    none = {}
-    botan = {}
-    openssl = {}
-    gcrypt = {}
-    fcrypt = {}
+def calculate_overhead( results, variant, phase ):
+    crypto_runtime = results[phase][variant]
+    base_runtime = results[phase][NOCRYPTO]
+    avg = 0.0
+    n = len(crypto_runtime)
+    for i in crypto_runtime:
+        avg += (1/n)*(float(crypto_runtime[i]) - float(base_runtime[i]))
+    print("avg\t" + phase + "\t" + variant + "\t" + str(avg))
+    
+    # TODO print overhead
 
-    parse_file(DATA_PATH + "get_crypto_botan.dat", botan)
-    parse_file(DATA_PATH + "get_crypto_openssl.dat", openssl)
-    parse_file(DATA_PATH + "get_crypto_gcrypt.dat", gcrypt)
-    parse_file(DATA_PATH + "get_no_crypto_plugin.dat", none)
+def main():
+    # initialize the result set
+    results = {}
+    for phase in KDB_PHASES:
+        results[phase] = {}
+        for variant in VARIANTS:
+            results[phase][variant] = {}
+            parse_file(DATA_PATH + phase + "_" + variant + ".dat", results[phase][variant])
+
+    # calculate average overhead and print results
+    for phase in KDB_PHASES:
+        for variant in VARIANTS:
+            if variant == NOCRYPTO:
+                continue
+            calculate_overhead(results, variant, phase)
 
 if __name__ == "__main__":
     main()
