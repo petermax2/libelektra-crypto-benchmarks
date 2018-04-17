@@ -51,7 +51,7 @@ def calculate_overhead( results, variant, phase ):
         base_runtime = float(base_runtimes[i])
         avg += (1/n)*(crypto_runtime - base_runtime)
         avg_percent += (1/n)*(crypto_runtime/base_runtime)
-    print("avg\t" + phase + "\t" + variant + "\t" + str(avg) + " s\t(factor " + str(avg_percent) + ")")
+    print("avg\t" + phase + "\t" + variant + "\t" + str(round(avg,3)) + " s\t(factor " + str(round(avg_percent,3)) + ")")
 
 def main():
     # initialize the result set
