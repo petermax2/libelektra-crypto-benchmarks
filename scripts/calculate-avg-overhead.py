@@ -41,15 +41,17 @@ def parse_file( path, results ):
     f.close()
 
 def calculate_overhead( results, variant, phase ):
-    crypto_runtime = results[phase][variant]
-    base_runtime = results[phase][NOCRYPTO]
+    crypto_runtimes = results[phase][variant]
+    base_runtimes = results[phase][NOCRYPTO]
     avg = 0.0
-    n = len(crypto_runtime)
-    for i in crypto_runtime:
-        avg += (1/n)*(float(crypto_runtime[i]) - float(base_runtime[i]))
-    print("avg\t" + phase + "\t" + variant + "\t" + str(avg))
-    
-    # TODO print median overhead
+    avg_percent = 0.0
+    n = len(crypto_runtimes)
+    for i in crypto_runtimes:
+        crypto_runtime = float(crypto_runtimes[i])
+        base_runtime = float(base_runtimes[i])
+        avg += (1/n)*(crypto_runtime - base_runtime)
+        avg_percent += (1/n)*(crypto_runtime/base_runtime)
+    print("avg\t" + phase + "\t" + variant + "\t" + str(avg) + " s\t(factor " + str(avg_percent) + ")")
 
 def main():
     # initialize the result set
